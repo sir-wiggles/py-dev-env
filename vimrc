@@ -1,4 +1,3 @@
-
 set nocompatible
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -28,33 +27,43 @@ set encoding=utf-8
 set clipboard=unnamed
 "set editing-mode vi
 
+let mapleader=","
+
 inoremap jk <ESC>
 
 au BufNewFile,BufRead *.py
-    \ set tabstop=4
-    \ set softtabstop=4
-    \ set shiftwidth=4
-    \ set textwidth=79
-    \ set expandtab
-    \ set autoindent
-    \ set fileformat=unix
+    set tabstop=4
+    set softtabstop=4
+    set shiftwidth=4
+    set textwidth=79
+    set expandtab
+    set autoindent
+    set fileformat=unix
 
 au BufNewFile,BufRead *.js, *.html, *.css
-    \ set tabstop=2
-    \ set softtabstop=2
-    \ set shiftwidth=2
+    set tabstop=2
+    set softtabstop=2
+    set shiftwidth=2
 
 " we also want to get rid of accidental trailing whitespace on save
 autocmd BufWritePre * :%s/\s\+$//e
 " Flag unnecessary whitespace
 au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 
+" =================================================
+" ----------
+" Navigation
+" ----------
 " split navigations
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
+" =================================================
+" -----------
+" CodeFolding
+" -----------
 " Enable folding
 set foldmethod=indent
 set foldlevel=99
@@ -73,6 +82,8 @@ try
   colorscheme Zenburn
 catch E185
 endtry
+
+let python_highlight_all=1
 
 " =================================================
 " -------
@@ -94,18 +105,8 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 let g:ycm_autoclose_preview_window_after_completion=1
 map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
-"python with virtualenv support
-py << EOF
-import os
-import sys
-if 'VIRTUAL_ENV' in os.environ:
-  project_base_dir = os.environ['VIRTUAL_ENV']
-  activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-  execfile(activate_this, dict(__file__=activate_this))
-EOF
-
-
-let python_highlight_all=1
-
-
+" =================================================
+" --------
+" NERDTree
+" --------
 let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree"
